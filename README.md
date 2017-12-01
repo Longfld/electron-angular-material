@@ -4,8 +4,10 @@ Electron App with Angular and Material by systemjs
 After download
 
 npm install
+
 npm start
-Every time you change your code it should be enough just reloading Electron via “View ⟶ Reload” or with Cmd-R (Ctrl-R on Windows)
+
+When code  changing, reloading Electron via “View ⟶ Reload” or with Cmd-R (Ctrl-R on Windows)
 
 For Electron quick start: https://electron.atom.io/docs/tutorial/quick-start/
 
