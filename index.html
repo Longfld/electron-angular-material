@@ -17,6 +17,22 @@
 
 <!-- Display the application -->
 <body>
+     Current version:
+    <span id="version">vX.Y.Z</span>
+    <div id="messages"></div>
+    <script>
+        let version = window.location.hash.substring(1);
+        document.getElementById('version').innerText = version;
+
+        const { ipcRenderer } = require('electron');
+        ipcRenderer.on('message', function (event, text) {
+            var container = document.getElementById('messages');
+            var message = document.createElement('div');
+            message.innerHTML = text;
+            container.appendChild(message);
+        })
+    </script>
+    
     <my-app>Loading...</my-app>
 
     <!-- All of the Node.js APIs are available in this renderer process. -->
