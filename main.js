@@ -1,45 +1,188 @@
-const electron = require('electron')
-const tray = require('./tray');
-// Module to control application life.
-const app = electron.app
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow
+const tray = require('./app/tray');
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
+const { app, BrowserWindow, Menu, protocol, ipcMain } = require('electron');
+const log = require('electron-log');
+const { autoUpdater } = require("electron-updater");
+
+
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+log.info('App starting...');
+
+
+let template = [
+  {
+    label: 'Edit',
+    submenu: [
+      {
+        role: 'undo'
+      },
+      {
+        role: 'redo'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        role: 'cut'
+      },
+      {
+        role: 'copy'
+      },
+      {
+        role: 'paste'
+      },
+      {
+        role: 'pasteandmatchstyle'
+      },
+      {
+        role: 'delete'
+      },
+      {
+        role: 'selectall'
+      }
+    ]
+  },
+  {
+    label: 'View',
+    submenu: [
+      {
+        role: 'reload'
+      },
+      {
+        role: 'forcereload'
+      },
+      {
+        role: 'toggledevtools'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        role: 'resetzoom'
+      },
+      {
+        role: 'zoomin'
+      },
+      {
+        role: 'zoomout'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        role: 'togglefullscreen'
+      }
+    ]
+  },
+  {
+    role: 'window',
+    submenu: [
+      {
+        role: 'minimize'
+      },
+      {
+        role: 'close'
+      }
+    ]
+  },
+  {
+    role: 'help',
+    submenu: [
+      {
+        label: 'Learn More',
+        click() {
+          shell.openExternal('https://electronjs.org')
+        }
+      },
+      {
+        label: 'Documentation',
+        click() {
+          shell.openExternal(
+            `https://github.com/electron/electron/tree/v${process.versions.electron}/docs#readme`
+          )
+        }
+      },
+      {
+        label: 'Community Discussions',
+        click() {
+          shell.openExternal('https://discuss.atom.io/c/electron')
+        }
+      },
+      {
+        label: 'Search Issues',
+        click() {
+          shell.openExternal('https://github.com/electron/electron/issues')
+        }
+      }
+    ]
+  }
+]
+
+
 let mainWindow
 
-function createWindow () {
+function sendStatusToWindow(text) {
+  log.info(text);
+  mainWindow.webContents.send('message', text);
+}
+
+function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     title: 'Angular Material',
-    icon: `${__dirname}/app/assets/angular-logo.png`,
+    icon: `${__dirname}/build/favicon.ico`,
     width: 800,
     height: 600
   })
 
-  // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
 
-  // show app on tray menu
+  mainWindow.loadURL(`file://${__dirname}/index.html#v${app.getVersion()}`);
+
   tray.create(mainWindow);
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
     mainWindow = null
   })
 }
 
+autoUpdater.on('checking-for-update', () => {
+  sendStatusToWindow('Checking for update...');
+})
+autoUpdater.on('update-available', (ev, info) => {
+  sendStatusToWindow('Update available.');
+})
+autoUpdater.on('update-not-available', (ev, info) => {
+  sendStatusToWindow('Update not available.');
+})
+autoUpdater.on('error', (ev, err) => {
+  sendStatusToWindow('Error in auto-updater.');
+})
+autoUpdater.on('download-progress', (ev, progressObj) => {
+  sendStatusToWindow('Download progress...');
+})
+autoUpdater.on('update-downloaded', (ev, info) => {
+  sendStatusToWindow('Update downloaded; will install in 5 seconds');
+});
+
+
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', function () {
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+
+  createWindow();
+  if (process.env.NODE_ENV !== "dev") {
+    autoUpdater.checkForUpdates();
+  }
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
@@ -58,5 +201,11 @@ app.on('activate', function () {
   }
 })
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+autoUpdater.on('update-downloaded', (ev, info) => {
+  // Wait 5 seconds, then quit and install
+  // In your application, you don't need to wait 5 seconds.
+  // You could call autoUpdater.quitAndInstall(); immediately
+  setTimeout(function () {
+    autoUpdater.quitAndInstall();
+  }, 5000)
+})
