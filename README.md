@@ -15,9 +15,11 @@ When code  changing, reloading Electron via “View ⟶ Reload” or with Cmd-R 
 *****************************************************
 ***********************************************
 
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 $ Electron Application auto update (Windows) $
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 Electron builder is a complete solution to package, build a ready for distribution Electron app and with  “auto update” support out of the box.
 
