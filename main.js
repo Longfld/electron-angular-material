@@ -165,11 +165,6 @@ autoUpdater.on('error', (ev, err) => {
 autoUpdater.on('download-progress', (ev, progressObj) => {
   sendStatusToWindow('Download progress...');
 })
-autoUpdater.on('update-downloaded', (ev, info) => {
-  sendStatusToWindow('Update downloaded; will install in 5 seconds');
-});
-
-
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -179,6 +174,7 @@ app.on('ready', function () {
   Menu.setApplicationMenu(menu);
 
   createWindow();
+  //Make sure in dev. enviroment, auto updater won't be called.
   if (process.env.NODE_ENV !== "dev") {
     autoUpdater.checkForUpdates();
   }
@@ -205,6 +201,8 @@ autoUpdater.on('update-downloaded', (ev, info) => {
   // Wait 5 seconds, then quit and install
   // In your application, you don't need to wait 5 seconds.
   // You could call autoUpdater.quitAndInstall(); immediately
+  sendStatusToWindow('Update downloaded; will install in 5 seconds');
+  mainWindow.setClosable(true);
   setTimeout(function () {
     autoUpdater.quitAndInstall();
   }, 5000)
