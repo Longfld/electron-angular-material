@@ -1,18 +1,23 @@
 {
-  "name": "electron-angular-material-systemjs",
-  "version": "0.1.0",
+  "name": "electron-angular-material",
+  "version": "0.2.0",
   "description": "Using Angular and Material with Electron by systemjs",
   "main": "main.js",
   "scripts": {
-    "start": "tsc && concurrently \"npm run tsc:w\" \"electron .\" ",
+    "start": "set NODE_ENV=dev&& tsc && concurrently \"npm run tsc:w\" \"electron .\" ",
     "tsc": "tsc",
-    "tsc:w": "tsc -w"
+    "tsc:w": "tsc -w",
+    "dist": "build -w --x64",
+    "wb": "http-server wwwroot/ -p 8080",
+    "prod": "tsc && concurrently \"npm run tsc:w\" \"electron .\" "
   },
   "keywords": [
     "Electron",
     "Angular",
     "Material",
-    "systemjs"
+    "systemjs",
+    "windows",
+    "autoupdate"
   ],
   "license": "MIT",
   "dependencies": {
@@ -33,12 +38,35 @@
     "rxjs": "5.5.2",
     "systemjs": "0.20.19",
     "typescript": "2.6.1",
-    "zone.js": "0.8.18"
+    "zone.js": "0.8.18",
+    "electron-log": "2.2.14",
+    "electron-updater": "2.20.1",
+    "http-server": "0.11.1"
   },
   "devDependencies": {
     "@types/core-js": "0.9.43",
     "@types/node": "8.0.49",
     "concurrently": "3.5.0",
-    "electron": "1.7.12"
+    "electron": "1.7.12",
+    "electron-builder": "19.55.3"
+  },
+  "build": {
+    "appId": "EAA",
+    "productName": "Electron Angular Application",
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://127.0.0.1:8080/"
+      }
+    ],
+    "nsis": {
+      "oneClick": false,
+      "artifactName": "Electron Angular Application Setup.exe"
+    }
   }
 }
