@@ -36,13 +36,13 @@ When complete, to install it by open your distribution files in "dist" folder, r
 ************************************
 Electron Application auto update (Windows)
 ---------------------------------------------
-1. Open a command prompt windows session, go to folder where package.json is and run this to start webiste (assume this is your hosting website)
+1. Open a command prompt windows session, go to folder where package.json is and run this to start website (assume this is your hosting website)
 >npm run wb
 
 2. Open another command prompt windows session, go to folder where package.json is and run build as:
 >npm run dist
 
-Copy everything under folder dist to folder wwwroot (assume this is distribution to production) 
+Copy everything under folder dist to folder wwwroot (assume this is distribution for production) 
 
 3. After complete, right click dist/"Electron Angular Application Setup.exe" and "run as administrator" to install electron application
 
