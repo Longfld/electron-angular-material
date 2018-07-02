@@ -31,7 +31,7 @@ How to package it?
 --------------------------------------------
 >npm run dist
 
-When complete, to install it by open your distribution files in "dist" folder, right click "Electron Angular Application Setup.exe" and "Run as administrator"
+When complete, for installation, right click "Electron Angular Application Setup.exe" in your "dist" folder and "Run as administrator".
 
 ************************************
 Electron Application auto update (Windows)
