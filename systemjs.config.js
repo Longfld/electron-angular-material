@@ -43,9 +43,13 @@
       '@angular/cdk/scrolling': 'npm:@angular/cdk/bundles/cdk-scrolling.umd.js',
       '@angular/cdk/table': 'npm:@angular/cdk/bundles/cdk-table.umd.js',
       '@angular/cdk/stepper': 'npm:@angular/cdk/bundles/cdk-stepper.umd.js',
+      '@angular/cdk/text-field': 'npm:@angular/cdk/bundles/cdk-text-field.umd.js',
+      '@angular/cdk/tree': 'npm:@angular/cdk/bundles/cdk-tree.umd.js',
 
       // other libraries
       'rxjs': 'npm:rxjs',
+      'rxjs-compat': 'npm:rxjs-compat',
+      'rxjs-system-bundle': 'npm:rxjs-system-bundle',
       'hammerjs': 'npm:hammerjs',
       'tslib': 'npm:tslib/tslib.js'
     },
@@ -55,13 +59,8 @@
         main: './main.js',
         defaultExtension: 'js'
       },
-      rxjs: {
-        defaultExtension: 'js'
-      },
-      "rxjs/operators": {
-        "main": "index.js",
-        "defaultExtension": "js"
-      },
+      'rxjs': {main: 'index.js', defaultExtension: 'js'},
+      'rxjs/operators': {main: 'index.js', defaultExtension: 'js'},
       hammerjs: {
         main: './hammer.js',
         defaultExtension: 'js'
