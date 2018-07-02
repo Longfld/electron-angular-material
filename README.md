@@ -46,10 +46,13 @@ Copy everything under folder dist to folder wwwroot (assume this is distribution
 
 3. Initial installation of your electron application: right click dist/"Electron Angular Application Setup.exe" and "run as administrator" to install
 
-4.Make sure installation is ok:  try your electron application from desktop shortcut and make sure everything is ok and you should see no update message. Now we are going to upgrade our electron application by:
+
+4. Make sure installation is ok:  try your electron application from desktop shortcut and make sure everything is ok and you should see no update message. Now we are going to upgrade our electron application by:
 >npm version patch
 
+
 5. Rebuild and distribute upgraded election application: delete everything in folder "dist" and "wwwroot" then repeat step 2 above again, and step 1.
+
 
 6. auto update happens: Open your electron application from desktop shortcut again and you can see new version is downloaded and upgraded.
 
