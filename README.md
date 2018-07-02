@@ -36,22 +36,22 @@ When complete, for installation, right click "Electron Angular Application Setup
 ************************************
 Electron Application auto update (Windows)
 ---------------------------------------------
-1. Open a command prompt windows session, go to folder where package.json is and run this to start website (assume this is your hosting website)
+1. Start your application hosting website(assume): Open a command prompt windows session, go to folder where package.json is and run this to start website:
 >npm run wb
 
-2. Open another command prompt windows session, go to folder where package.json is and run build as:
+2. Package your inital version application: Open another command prompt windows session, go to folder where package.json is and run build as:
 >npm run dist
 
 Copy everything under folder dist to folder wwwroot (assume this is distribution for production) 
 
-3. After complete, right click dist/"Electron Angular Application Setup.exe" and "run as administrator" to install electron application
+3. Initial installation of your electron application: right click dist/"Electron Angular Application Setup.exe" and "run as administrator" to install
 
-4. Try your electron application from desktop shortcut and make sure everything is ok, then we upgrade our electron application by:
+4.Make sure installation is ok:  try your electron application from desktop shortcut and make sure everything is ok, then we are going to upgrade our electron application by:
 >npm version patch
 
-5. To build and distribute, delete everything in folder "dist" and "wwwroot" then repeat step 2 above again.
+5. Rebuild and distribute upgraded election application: delete everything in folder "dist" and "wwwroot" then repeat step 2 above again.
 
-6. Open your electron application from desktop shortcut again and you can see new version is downloaded and upgraded.
+6. auto update happens: Open your electron application from desktop shortcut again and you can see new version is downloaded and upgraded.
 
 **************************************************
 
