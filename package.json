@@ -1,6 +1,6 @@
 {
   "name": "electron-angular-material",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Using Angular and Material with Electron by systemjs",
   "main": "main.js",
   "scripts": {
@@ -48,7 +48,7 @@
   "devDependencies": {
    "@types/node": "10.0.4",
     "concurrently": "3.5.0",
-    "electron": "2.0.3",
+    "electron": "2.0.8",
     "electron-builder": "20.8.0"
   },
   "build": {
